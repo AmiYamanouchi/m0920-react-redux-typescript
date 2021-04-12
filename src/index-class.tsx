@@ -8,6 +8,7 @@ interface AppProps {
 // interface AppState {
 //     counter: number
 // }
+
 class App extends React.Component<AppProps> {
     state = { counter: 0 }
     // constructor(props: AppProps){

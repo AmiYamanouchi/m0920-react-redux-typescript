@@ -1,8 +1,10 @@
-import { FetchTodosAction, ClearTodosAction } from './todos'
+import { FetchTodosAction, ClearTodosAction, DeleteTodoAction } from './todos'
 
 export enum ActionTypes {
     fetchTodos,
-    clearTodos
+    clearTodos,
+    //↓追加
+    deleteTodo
 }
-
-export type Action = FetchTodosAction | ClearTodosAction
+ //↓DeleteActionを追加
+export type Action = FetchTodosAction | ClearTodosAction | DeleteTodoAction

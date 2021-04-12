@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Todo, fetchTodos, clearTodos } from '../actions'
+import { Todo, fetchTodos, clearTodos, deleteTodo } from '../actions'
 import { StoreState } from '../reducers'
 
 interface AppProps {
     todos: Todo[];
     fetchTodos: Function; //only for Action creators
     clearTodos: Function;
+    deleteTodo: Function; //デリートのインターフェイスいれる
 }
 
 interface AppState {
@@ -32,10 +33,16 @@ class _App extends Component<AppProps,AppState> {
         this.setState({ fetching: true })
     }
 
+    //リストクリックしたら消す関数
+    onListClick = (id: number):void => {
+        this.props.deleteTodo(id)
+    }
+
     renderList(): JSX.Element[] {
         return this.props.todos.map((todo: Todo) => {
             return(
-                <div key={todo.id}>
+                //オンクリックとアイテムクリックのイベントをいれる
+                <div key={todo.id} onClick={()=> this.onListClick(todo.id)}>
                     {todo.title}
                 </div>
             )
@@ -57,4 +64,5 @@ const mapStateToProps = ({ todos }: StoreState): { todos: Todo[] } => {
     return { todos }
 }
 
-export const App = connect(mapStateToProps, { fetchTodos, clearTodos })(_App)
+//deleteTodoを追加する
+export const App = connect(mapStateToProps, { fetchTodos, clearTodos, deleteTodo })(_App)
